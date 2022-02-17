@@ -1,4 +1,4 @@
-// input value
+// common function
 
 function getValue(inputId, isInput) {
   if (isInput) {
@@ -9,8 +9,10 @@ function getValue(inputId, isInput) {
     return inputAmound;
   }
 }
+// event handeler
 
 document.getElementById("calculate-btn").addEventListener("click", function () {
+  // total income
   const totalIncome = getValue("total-income", true);
   // food expenses
   const foodExpenses = getValue("food-expenses", true);
@@ -23,25 +25,25 @@ document.getElementById("calculate-btn").addEventListener("click", function () {
   //   Total expenses update
   document.getElementById("total-expenses").innerText = totalExpenses;
   //   Total Balance update
+
   document.getElementById("total-balance").innerText =
     totalIncome - totalExpenses;
 });
-// save amount
+// event handaler
 document.getElementById("save-btn").addEventListener("click", function () {
-  const incomeInput = document.getElementById("total-income");
-  const totalIncome = incomeInput.value;
-  const totalIncomeAmound = parseFloat(totalIncome);
-  // saveing amound
+  const totalIncome = getValue("total-income", true);
+  const balance = getValue("total-balance", false);
+  // save input
   const saveInput = document.getElementById("save-input");
 
   const saveValue = parseFloat(saveInput.value);
-
-  const saveAmound = (totalIncomeAmound * saveValue) / 100;
+  // saving amound
+  const saveAmound = (totalIncome * saveValue) / 100;
   const saveMoney = document.getElementById("saveing-amound");
   const saveText = saveMoney.innerText;
   saveMoney.innerText = saveAmound;
   // Remaining Balance
   const remainedBalance = document.getElementById("remaining-balance");
   const remainedBalanceText = remainedBalance.innerText;
-  remainedBalance.innerText = -saveAmound;
+  remainedBalance.innerText = balance - saveAmound;
 });
